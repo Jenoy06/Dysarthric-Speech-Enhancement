@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Dataset and generated features
+dataset/
+processed_features/
+*.wav
+
+# Generated model files
+*.pth
+*.pt
+*.onnx
+
+# Secrets
+.env
