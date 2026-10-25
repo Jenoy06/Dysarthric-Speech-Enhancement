@@ -3,6 +3,22 @@ import numpy as np
 import pandas as pd
 import librosa
 from tqdm import tqdm
+from dtw_alignment import extract_log_mel_spectrogram, align_spectrograms_with_dtw
+
+# 1. Load your paired audio file paths from TORGO
+dysarthric_path = r"D:\Dysarthric Speech Enhancement\torgo\dysarthric_sample.wav"
+control_path = r"D:\Dysarthric Speech Enhancement\torgo\control_sample.wav"
+
+# 2. Extract Log-Mel spectrograms
+dys_spec = extract_log_mel_spectrogram(dysarthric_path)
+ctrl_spec = extract_log_mel_spectrogram(control_path)
+
+# 3. Apply DTW Alignment so shapes match perfectly for your neural network
+aligned_dys_spec = align_spectrograms_with_dtw(dys_spec, ctrl_spec)
+
+print(f"Original Dysarthric Shape: {dys_spec.shape}")
+print(f"Target Control Shape:    {ctrl_spec.shape}")
+print(f"DTW Aligned Shape:       {aligned_dys_spec.shape}")
 
 CSV_PATH = 'torgo_inventory.csv'
 OUTPUT_DIR = 'processed_features'
